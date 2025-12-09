@@ -188,7 +188,6 @@ The cloud is **gravitationally stable** at all temperatures:
 ## 🔮 Future Extensions
 
 - [ ] Time evolution (watch ionisation fronts propagate)
-- [x] ~~Emission spectrum calculation~~ ✅ Implemented!
 
 ## 📚 References
 
