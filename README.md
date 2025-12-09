@@ -6,7 +6,7 @@ This project models how a 1 light-year hydrogen cloud responds to different back
 
 ## 🎯 The Setup
 
-Imagine a giant, extremely thin ball of hydrogen gas floating in vacuum:
+Imagine a giant, extremely thin ball of hydrogen gas floating in a vacuum:
 
 | Parameter | Value |
 |-----------|-------|
@@ -24,7 +24,7 @@ We then "turn the knob" on the background radiation temperature and watch what h
 - Electronic transitions (Lyman, Balmer series)
 - 21 cm hyperfine transition
 - Selection rules and Einstein coefficients
-- Photoionization cross-sections
+- Photoionisation cross-sections
 
 ### Statistical Mechanics
 - **Boltzmann distribution** for level populations
@@ -35,7 +35,7 @@ $$\frac{n_{H^+} n_e}{n_H} = \frac{(2\pi m_e k_B T)^{3/2}}{h^3} \exp\left(-\frac{
 - Partition functions
 
 ### Thermodynamics
-- Photoionization heating
+- Photoionisation heating
 - Recombination cooling
 - Bremsstrahlung (free-free) cooling
 - Collisional excitation cooling
@@ -54,7 +54,7 @@ $$\frac{n_{H^+} n_e}{n_H} = \frac{(2\pi m_e k_B T)^{3/2}}{h^3} \exp\left(-\frac{
 
 ## 🎉 Key Results: Sharp Phase Transitions!
 
-The ionization transition is **incredibly sharp** — almost like a true phase transition:
+The ionisation transition is **incredibly sharp** — almost like a true phase transition:
 
 | Ionization | Temperature |
 |------------|-------------|
@@ -64,7 +64,7 @@ The ionization transition is **incredibly sharp** — almost like a true phase t
 | 90% | ~3,470 K |
 | 99% | ~3,660 K |
 
-The transition from 10% to 90% ionization happens over just **~430 K** — a 14% change in temperature!
+The transition from 10% to 90% ionisation happens over just **~430 K** — a 14% change in temperature!
 
 This sharpness comes from the exponential Boltzmann factor:
 $$x_{ion} \propto \exp\left(-\frac{158,000\text{ K}}{T}\right)$$
@@ -78,6 +78,12 @@ $$x_{ion} \propto \exp\left(-\frac{158,000\text{ K}}{T}\right)$$
 ![Excitation Transition](excitation_transition.png)
 
 ![Ionization Transition](ionization_transition.png)
+
+![Emission Spectrum](emission_spectrum.png)
+
+![Emission VS Temperature](emission_vs_temperature.png)
+
+![Line Strengths](line_strengths.png)
 
 ## 🚀 Getting Started
 
@@ -140,7 +146,7 @@ Shows characteristic "edges" at each series limit (Lyman limit at 91.2 nm, Balme
 Thermal emission from electron-ion scattering:
 $$j_\nu^{ff} \propto n_e n_{H^+} T^{-1/2} g_{ff} e^{-h\nu/kT}$$
 
-Dominates at long wavelengths in ionized plasma.
+Dominates at long wavelengths in ionised plasma.
 
 ### Usage
 
@@ -163,7 +169,7 @@ plot_emission_spectrum(spectrum, T_rad, save_path='my_spectrum.png')
 | **2.7 K** (CMB) | Frozen hydrogen, visible only at 21 cm |
 | **300 K** (room) | Still frozen, expands slowly |
 | **~3,000 K** | **PHASE TRANSITION!** Ionization begins |
-| **~4,000 K** | Nearly fully ionized, glowing in Balmer lines |
+| **~4,000 K** | Nearly fully ionised, glowing in Balmer lines |
 | **10,000+ K** | Full H II region physics |
 
 ### Gravitational Stability
@@ -177,11 +183,11 @@ The cloud is **gravitationally stable** at all temperatures:
 
 - **Lyman-α**: τ ~ 10⁷ at low T → completely opaque at line center
 - **21 cm**: τ ~ 10³ → optically thick
-- Both drop dramatically when ionization occurs
+- Both drop dramatically when ionisation occurs
 
 ## 🔮 Future Extensions
 
-- [ ] Time evolution (watch ionization fronts propagate)
+- [ ] Time evolution (watch ionisation fronts propagate)
 - [x] ~~Emission spectrum calculation~~ ✅ Implemented!
 
 ## 📚 References
