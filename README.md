@@ -46,6 +46,7 @@ $$\frac{n_{H^+} n_e}{n_H} = \frac{(2\pi m_e k_B T)^{3/2}}{h^3} \exp\left(-\frac{
 - Doppler-broadened line profiles
 - Planck function and blackbody statistics
 - **Emission spectrum calculation** (line + continuum)
+- **Time-dependent radiative transfer** for ionization fronts
 
 ### Fluid Dynamics
 - Sound speed
@@ -105,6 +106,9 @@ python phase_transitions.py
 # Emission spectrum calculation
 python emission.py
 
+# Time evolution of ionization fronts
+python time_evolution.py
+
 # Test individual modules
 python constants.py
 python blackbody.py
@@ -122,6 +126,7 @@ python thermal.py
 ├── equilibrium.py      # Saha equation, Boltzmann populations
 ├── thermal.py          # Heating/cooling rates, thermal equilibrium
 ├── emission.py         # Emission spectrum (lines + continuum)
+├── time_evolution.py   # 1D spherical ionization front propagation
 ├── simulation.py       # Main simulation, temperature sweeps, plotting
 └── phase_transitions.py # Detailed analysis of transition sharpness
 ```
@@ -160,6 +165,62 @@ spectrum = compute_emission_spectrum(n_total, T_rad)
 plot_emission_spectrum(spectrum, T_rad, save_path='my_spectrum.png')
 ```
 
+## ⏱️ Time Evolution Module
+
+The `time_evolution.py` module implements **1D spherical radiative transfer** with time-dependent ionization dynamics, allowing you to watch ionization fronts propagate through the cloud.
+
+### Physics
+
+Unlike the equilibrium calculations (Saha equation), this module solves the **rate equations**:
+
+$$\frac{dx}{dt} = \Gamma(\tau) \cdot (1-x) - \alpha(T) \cdot n \cdot x^2$$
+
+Where:
+- $\Gamma(\tau)$ is the photoionization rate attenuated by optical depth
+- $\alpha(T)$ is the Case B recombination coefficient
+- $x$ is the local ionization fraction
+
+The optical depth is computed self-consistently as the front propagates:
+$$\tau(r) = \int_r^R n_H(r') \sigma_{bf} dr'$$
+
+### Key Features
+
+- **Radial discretization**: Cloud divided into N shells
+- **Radiative transfer**: Ionizing radiation attenuated by neutral hydrogen
+- **Adaptive integration**: Uses `scipy.integrate.solve_ivp` with LSODA
+- **Front tracking**: Automatically locates the ionization front position
+- **Visualization**: Space-time diagrams, front velocity, multi-temperature comparisons
+
+### Usage
+
+```python
+from time_evolution import evolve_ionization, plot_ionization_evolution
+from constants import ly_to_m
+
+# Evolve a cloud exposed to hot radiation
+result = evolve_ionization(
+    n_total=1e6,           # atoms/m³
+    T_rad=30000,           # K (radiation temperature)
+    T_gas=10000,           # K (gas kinetic temperature)
+    R_cloud=1.0 * ly_to_m, # 1 light-year
+    N_shells=100
+)
+
+# Visualize the propagation
+plot_ionization_evolution(result, save_path='ionization_front.png')
+```
+
+### Compare Different Temperatures
+
+```python
+from time_evolution import plot_multi_temperature
+
+plot_multi_temperature(
+    temperatures=[10000, 20000, 30000, 50000],
+    save_path='front_comparison.png'
+)
+```
+
 ## 🔭 What We Learn
 
 ### Temperature Regimes
@@ -184,10 +245,6 @@ The cloud is **gravitationally stable** at all temperatures:
 - **Lyman-α**: τ ~ 10⁷ at low T → completely opaque at line center
 - **21 cm**: τ ~ 10³ → optically thick
 - Both drop dramatically when ionisation occurs
-
-## 🔮 Future Extensions
-
-- [ ] Time evolution (watch ionisation fronts propagate)
 
 ## 📚 References
 
