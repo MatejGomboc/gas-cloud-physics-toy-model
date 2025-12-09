@@ -70,9 +70,13 @@ $$x_{ion} \propto \exp\left(-\frac{158,000\text{ K}}{T}\right)$$
 
 ## 📊 Sample Output
 
-![Simulation Results](docs/simulation_results.png)
+![Simulation Results](simulation_results.png)
 
-![Ionization Transition](docs/ionization_transition.png)
+![Density Dependence](density_dependence.png)
+
+![Excitation Transition](excitation_transition.png)
+
+![Ionization Transition](ionization_transition.png)
 
 ## 🚀 Getting Started
 
