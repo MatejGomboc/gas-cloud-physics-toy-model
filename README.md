@@ -142,9 +142,7 @@ The cloud is **gravitationally stable** at all temperatures:
 - [ ] Time evolution (watch ionization fronts propagate)
 - [ ] Emission spectrum calculation
 - [ ] Spatial structure (non-uniform clouds)
-- [ ] Multiple species (He, metals)
 - [ ] Molecular hydrogen (H₂)
-- [ ] Dust grains and extinction
 
 ## 📚 References
 
