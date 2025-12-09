@@ -45,6 +45,7 @@ $$\frac{n_{H^+} n_e}{n_H} = \frac{(2\pi m_e k_B T)^{3/2}}{h^3} \exp\left(-\frac{
 - Optical depths at various wavelengths
 - Doppler-broadened line profiles
 - Planck function and blackbody statistics
+- **Emission spectrum calculation** (line + continuum)
 
 ### Fluid Dynamics
 - Sound speed
@@ -95,6 +96,9 @@ python simulation.py
 # Detailed phase transition analysis
 python phase_transitions.py
 
+# Emission spectrum calculation
+python emission.py
+
 # Test individual modules
 python constants.py
 python blackbody.py
@@ -111,9 +115,43 @@ python thermal.py
 ├── atomic_physics.py   # Energy levels, cross-sections, Einstein coefficients
 ├── equilibrium.py      # Saha equation, Boltzmann populations
 ├── thermal.py          # Heating/cooling rates, thermal equilibrium
+├── emission.py         # Emission spectrum (lines + continuum)
 ├── simulation.py       # Main simulation, temperature sweeps, plotting
-├── phase_transitions.py # Detailed analysis of transition sharpness
-└── docs/               # Output figures
+└── phase_transitions.py # Detailed analysis of transition sharpness
+```
+
+## 💡 Emission Spectrum Module
+
+The `emission.py` module calculates the cloud's emission spectrum from three physical processes:
+
+### 1. Line Emission (Bound-Bound)
+Spontaneous emission from excited atoms:
+$$j_\nu = \frac{h\nu}{4\pi} n_u A_{ul} \phi(\nu)$$
+
+Includes Lyman series (n→1), Balmer series (n→2), Paschen series (n→3), etc.
+
+### 2. Recombination Continuum (Free-Bound)
+Electron capture producing continuum radiation:
+$$j_\nu^{fb} \propto n_e n_{H^+} \sigma_{bf}(\nu) e^{-h(\nu-\nu_n)/kT}$$
+
+Shows characteristic "edges" at each series limit (Lyman limit at 91.2 nm, Balmer limit at 364.6 nm).
+
+### 3. Bremsstrahlung (Free-Free)
+Thermal emission from electron-ion scattering:
+$$j_\nu^{ff} \propto n_e n_{H^+} T^{-1/2} g_{ff} e^{-h\nu/kT}$$
+
+Dominates at long wavelengths in ionized plasma.
+
+### Usage
+
+```python
+from emission import compute_emission_spectrum, plot_emission_spectrum
+
+n_total = 1e6  # atoms/m³
+T_rad = 5000   # K
+
+spectrum = compute_emission_spectrum(n_total, T_rad)
+plot_emission_spectrum(spectrum, T_rad, save_path='my_spectrum.png')
 ```
 
 ## 🔭 What We Learn
@@ -144,7 +182,7 @@ The cloud is **gravitationally stable** at all temperatures:
 ## 🔮 Future Extensions
 
 - [ ] Time evolution (watch ionization fronts propagate)
-- [ ] Emission spectrum calculation
+- [x] ~~Emission spectrum calculation~~ ✅ Implemented!
 
 ## 📚 References
 
