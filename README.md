@@ -160,6 +160,8 @@ This program is free software: you can redistribute it and/or modify it under th
 
 See [LICENSE](LICENSE) for details.
 
+**Original repository:** https://github.com/MatejGomboc/gas-cloud-physics-toy-model
+
 ---
 
 *Built with physics, numpy, and curiosity* 🔭✨
