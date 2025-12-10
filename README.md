@@ -72,6 +72,8 @@ $$x_{ion} \propto \exp\left(-\frac{158,000\text{ K}}{T}\right)$$
 
 ## 📊 Sample Output
 
+### Equilibrium Results
+
 ![Simulation Results](simulation_results.png)
 
 ![Density Dependence](density_dependence.png)
@@ -80,11 +82,31 @@ $$x_{ion} \propto \exp\left(-\frac{158,000\text{ K}}{T}\right)$$
 
 ![Ionization Transition](ionization_transition.png)
 
+### Emission Spectra
+
 ![Emission Spectrum](emission_spectrum.png)
 
 ![Emission VS Temperature](emission_vs_temperature.png)
 
 ![Line Strengths](line_strengths.png)
+
+### Time Evolution & Ionization Fronts
+
+![Cloud Schematic](cloud_schematic.png)
+
+![Ionization Front Propagation](ionization_spectacular.png)
+
+![Temperature Comparison](temperature_comparison.png)
+
+![3D Evolution](evolution_3d.png)
+
+### Breathing: Time-Varying Radiation
+
+![Breathing Summary](breathing_summary.png)
+
+![Square Wave Breathing](breath_square.png)
+
+![Short Pulse Breathing](breath_pulses.png)
 
 ## 🚀 Getting Started
 
