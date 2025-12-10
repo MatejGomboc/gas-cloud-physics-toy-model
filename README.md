@@ -109,6 +109,12 @@ python emission.py
 # Time evolution of ionization fronts
 python time_evolution.py
 
+# Wobbling temperature / breathing simulation
+python breathing.py
+
+# Publication-quality visualizations
+python visualizations.py
+
 # Test individual modules
 python constants.py
 python blackbody.py
@@ -127,6 +133,8 @@ python thermal.py
 ├── thermal.py          # Heating/cooling rates, thermal equilibrium
 ├── emission.py         # Emission spectrum (lines + continuum)
 ├── time_evolution.py   # 1D spherical ionization front propagation
+├── breathing.py        # Time-varying radiation field response
+├── visualizations.py   # Publication-quality plots with dark theme
 ├── simulation.py       # Main simulation, temperature sweeps, plotting
 └── phase_transitions.py # Detailed analysis of transition sharpness
 ```
@@ -219,6 +227,50 @@ plot_multi_temperature(
     temperatures=[10000, 20000, 30000, 50000],
     save_path='front_comparison.png'
 )
+```
+
+## 🫁 Breathing Module
+
+The `breathing.py` module simulates how a cloud responds to **oscillating radiation temperature** — watch ionization "breathe" in and out!
+
+### Key Physics Insight
+
+To see actual breathing, you need:
+1. **High density** (n ~ 10¹⁰ m⁻³) for fast recombination (t_rec ~ 10 years)
+2. **Truly cold** "off" temperatures (< 1000 K) where ionization is negligible
+3. **Period comparable to t_rec** so the cloud can respond
+
+At low densities (n ~ 10⁶ m⁻³), t_rec ~ 100,000 years and the cloud stays ionized through any realistic temperature oscillation!
+
+### Scenarios
+
+| Pattern | Behavior |
+|---------|----------|
+| Slow sine wave | Cloud follows temperature smoothly |
+| Fast sine wave | Cloud averages out, can't follow |
+| Square wave | Sharp ionize/recombine cycles |
+| Short hot pulses | Sawtooth pattern, gradual buildup |
+
+### Usage
+
+```python
+from breathing import evolve_0d, make_square_temperature
+from thermal import recombination_coefficient_B
+
+n_total = 1e10  # High density for fast response
+T_gas = 8000
+
+# Create a pulsed temperature pattern
+alpha = recombination_coefficient_B(T_gas)
+t_rec = 1.0 / (alpha * n_total)  # ~10 years
+
+T_func = make_square_temperature(
+    T_hot=30000, T_cold=100,
+    period=5*t_rec, duty_cycle=0.5
+)
+
+t = np.linspace(0, 6*5*t_rec, 2000)
+x = evolve_0d(n_total, T_func, T_gas, t)
 ```
 
 ## 🔭 What We Learn
